@@ -15,7 +15,8 @@ class Mentor:
         self.courses_attached = []
 
     def rate_hw(self, student, course, grade):
-        if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
+        if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress \
+                and hasattr(self, 'reviewing'):
             if course in student.grades:
                 student.grades[course] += [grade]
             else:
@@ -24,14 +25,23 @@ class Mentor:
             return 'Ошибка'
 
 
+class Reviewer(Mentor):
+    def __init__(self, name, surname):
+        Mentor.__init__(self, name, surname)
+        self.reviewing = True
+
+
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
 
 cool_mentor = Mentor('Some', 'Buddy')
 cool_mentor.courses_attached += ['Python']
+the_lector = Reviewer('Pythonist', 'Megalector')
+the_lector.courses_attached += ['Python']
 
 cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
+the_lector.rate_hw(best_student, 'Python', 10)
 
 print(best_student.grades)
