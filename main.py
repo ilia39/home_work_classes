@@ -1,16 +1,3 @@
-def get_average(graded_class):
-    if len(graded_class.grades) > 0:
-        summa = 0
-        count = 0
-        for key in graded_class.grades.keys():
-            summa += sum(graded_class.grades[key])
-            count += len(graded_class.grades[key])
-    else:
-        return 0
-    average = summa / count
-    return average
-
-
 class Student:
     student_list = []
 
@@ -159,6 +146,19 @@ def count_average_by_lecturers(lecturers, course):
         average = summa / count
         # print(summa, count) # Так проверить легче
         return average
+
+
+def get_average(graded_class):
+    if len(graded_class.grades) > 0:
+        summa = 0
+        count = 0
+        for key in graded_class.grades.keys():
+            summa += sum(graded_class.grades[key])
+            count += len(graded_class.grades[key])
+    else:
+        return 0
+    average = summa / count
+    return average
 
 
 best_student = Student('Ruy', 'Eman', 'your_gender')
